@@ -1,5 +1,5 @@
 export default class Precio {
-  _precio;
+  _valor;
   /**
    *
    * @param {number} valor El valor del producto
