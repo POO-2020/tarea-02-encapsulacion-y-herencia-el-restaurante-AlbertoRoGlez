@@ -1,9 +1,12 @@
 export default class Cliente {
+_direccion
+_nombre
+_telefono
   /**
    *
    * @param {string} nombre Nombre completo del cliente
    * @param {Direccion} direccion La dirección del cliente
-   * @param {number} telefono Número de teléfonodel cliente
+   * @param {string} telefono Número de teléfonodel cliente
    */
   constructor(nombre, direccion, telefono) {
     this.direccion = direccion;
