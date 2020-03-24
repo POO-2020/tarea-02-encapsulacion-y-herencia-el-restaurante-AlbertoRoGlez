@@ -1,4 +1,7 @@
 export default class Tiempo {
+  _hora;
+  _minuto;
+  _periodo;
   /**
    *
    * @param {number} hora
