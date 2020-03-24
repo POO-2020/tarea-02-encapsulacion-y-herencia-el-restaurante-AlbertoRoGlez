@@ -5,6 +5,10 @@ import ElementoPedido from './elemento-pedido.js';
 import Precio from './precio.js';
 
 export default class Pedido {
+_fecha;
+_hora;
+_cliente;
+_elementosPedidos;
   /**
    *
    * @param {Fecha} fecha La fecha del día.
@@ -12,26 +16,26 @@ export default class Pedido {
    * @param {Cliente} cliente Cliente al que se le está vendiendo.
    */
   constructor(fecha, hora, cliente) {
-    this.fecha = fecha;
-    this.hora = hora;
-    this.cliente = cliente;
-    this.elementosPedidos = new Array();
+    this._fecha = fecha;
+    this._hora = hora;
+    this._cliente = cliente;
+    this._elementosPedidos = new Array();
   }
 
   getResumen() {
-    return `${this.fecha.getFecha()} ${this.hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getNumeroProductos()} productos - total: ${new Precio(
+    return `${this._fecha.getFecha()} ${this._hora.getFormato12()} - ${this.getNumeroElementos()} elementos con ${this.getNumeroProductos()} productos - total: ${new Precio(
       this.getCostoTotal()
     ).getPrecio()} `;
   }
 
   getNumeroElementos() {
-    return this.elementosPedidos.length;
+    return this._elementosPedidos.length;
   }
 
   getNumeroProductos() {
     let totalProductos = 0;
 
-    this.elementosPedidos.forEach(elemento => {
+    this._elementosPedidos.forEach(elemento => {
       totalProductos = totalProductos + elemento.cantidad;
     });
 
@@ -41,7 +45,7 @@ export default class Pedido {
   getCostoTotal() {
     let costoTotal = 0;
 
-    this.elementosPedidos.forEach(elemento => {
+    this._elementosPedidos.forEach(elemento => {
       costoTotal =
         costoTotal + elemento.cantidad * elemento.producto.precio.valor;
     });
@@ -50,11 +54,11 @@ export default class Pedido {
   }
 
   agregarElemento(elemento) {
-    this.elementosPedidos.push(elemento);
+    this._elementosPedidos.push(elemento);
   }
 
   listarElementos() {
-    this.elementosPedidos.forEach(elemento => {
+    this._elementosPedidos.forEach(elemento => {
       console.log(elemento.getDescripcion());
     });
   }

@@ -1,46 +1,36 @@
-export default class Fecha {
-  /**
-   *
-   * @param {number} dia
-   * @param {number} mes
-   * @param {number} año
-   */
-  constructor(dia, mes, año) {
-    this.fecha = new Date(año, mes - 1, dia);
-  }
+class Fecha extends Date {
+  getAños = () => {
+    let a = new Date();
+    let years = (this - a) / 31540000000;
+    return Math.trunc(years);
+  };
 
-  getAños() {
-    let hoy = new Date(Date.now());
-    let años = hoy.getFullYear() - this.fecha.getFullYear();
-    return años;
-  }
+  getMeses = () => {
+    let a = new Date();
+    let mes = (this - a) / 2628000000;
+    return Math.trunc(mes);
+  };
 
-  getMeses() {
-    return this.getAños() * 12;
-  }
+  getSemanas = () => {
+    let a = new Date();
+    let semana = (this - a) / 604800000;
+    return Math.trunc(semana);
+  };
 
-  getSemanas() {
-    return this.getMeses() * 4;
-  }
+  getDias = () => {
+    let a = new Date();
+    let dia = (this - a) / 86400000;
+    return Math.trunc(dia);
+  };
 
-  getDias() {
-    return this.getSemanas() * 7;
-  }
+  getFecha = () =>
+    `${this.getDate()}/${meses[this.getMonth()]}/${this.getFullYear()}`;
 
-  getFecha() {
-    return `${this.fecha.getDate()}/${
-      nombreMes[this.fecha.getMonth()]
-    }/${this.fecha.getFullYear()}`;
-  }
-
-  getDiaFecha() {
-    let dia = nombreDia[this.fecha.getDay()];
-
-    return dia;
-  }
+  getDiaFecha = () => `${dias[this.getDate()]}`;
 }
 
-const nombreDia = [
+
+const dias = [
   'Domingo',
   'Lunes',
   'Martes',
@@ -50,7 +40,7 @@ const nombreDia = [
   'Sabado'
 ];
 
-const nombreMes = [
+const meses = [
   'Ene',
   'Feb',
   'Mar',
@@ -64,3 +54,5 @@ const nombreMes = [
   'Nov',
   'Dic'
 ];
+
+export default Fecha;
